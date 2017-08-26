@@ -1,0 +1,27 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+  {# topic at top, user can see what topic they're #}
+  {# adding to & link to main page of topic#}
+  <p>
+    <a href="{% url 'learning_logs:topic' topic.id %}">
+      {{ topic }}
+    </a>
+  </p>
+
+  <p>Add a new entry:</p>
+  {# action argument includes topic_id#}
+  {#  so view function can associate new entry with topic#}
+  <form
+    action="{% url 'learning_logs:new_entry' topic.id %}"
+    {% comment %}
+    {% endcomment %}
+    method='post'>
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name='submit'>add entry</button>
+  </form>
+
+{% endblock content %}
